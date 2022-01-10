@@ -1,6 +1,5 @@
 package string
 
-
 //给定一个非空字符串 s 和一个包含非空单词的列表 wordDict，判定 s 是否可以被空格拆分为一个或多个在字典中出现的单词。
 //
 //说明：
@@ -33,18 +32,17 @@ package string
 // Related Topics 动态规划
 // 👍 707 👎 0
 
-
 //leetcode submit region begin(Prohibit modification and deletion)
 func wordBreak(s string, wordDict []string) bool {
-	wordDictSet := make(map[string]bool)
-	for _, w := range wordDict{
-		wordDictSet[w] = true
+	m := make(map[string]bool)
+	for _, w := range wordDict {
+		m[w] = true
 	}
-	dp := make([]bool, len(s) + 1)
+	dp := make([]bool, len(s)+1)
 	dp[0] = true
-	for i := 1; i < len(dp); i ++{
+	for i := 1; i < len(dp); i++ {
 		for j := 0; j < i; j++ {
-			if dp[j] && wordDictSet[s[j:i]] {
+			if dp[j] && m[s[j:i]] {
 				dp[i] = true
 				break
 			}
@@ -52,4 +50,5 @@ func wordBreak(s string, wordDict []string) bool {
 	}
 	return dp[len(s)]
 }
+
 //leetcode submit region end(Prohibit modification and deletion)

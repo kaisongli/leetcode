@@ -1,4 +1,5 @@
 package dp
+
 /**
 第300题：最长上升子序列
 给定一个无序的整数数组，找到其中最长上升子序列的长度。
@@ -37,18 +38,19 @@ nums[i] > nums[p]
 ....
 
 最后，我们只需要找到dp数组中的最大值，就是我们要找的答案。
- */
+*/
 func lengthOfLIS(nums []int) int {
 	if len(nums) < 1 {
 		return 0
 	}
 	dp := make([]int, len(nums))
 	res := 1
-	for i := 0; i < len(nums); i ++ {
+	for i := 0; i < len(nums); i++ {
 		dp[i] = 1
-		for j := 0; j < i; j ++ {
+		for j := 0; j < i; j++ {
+			//j->i
 			if nums[j] < nums[i] {
-				dp[i] = max(dp[j] + 1, dp[i])
+				dp[i] = max(dp[i], dp[j]+1)
 			}
 		}
 		res = max(res, dp[i])

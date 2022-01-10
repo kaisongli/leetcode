@@ -27,48 +27,45 @@ import "sort"
 首先拿到这道题，我们基本马上可以想到，此题可以看成是一道传统的映射题（map映射），
 为什么可以这样看呢，因为我们需找出两个数组的交集元素，同时应与两个数组中出现的次数一致。
 这样就导致了我们需要知道每个值出现的次数，所以映射关系就成了<元素,出现次数>。
- */
+*/
 func intersect(nums1 []int, nums2 []int) []int {
 	if len(nums1) == 0 || len(nums2) == 0 {
-		return []int {}
+		return []int{}
 	}
 	interMap := make(map[int]int)
 	res := make([]int, 0)
-	for _, v := range nums1{
+	for _, v := range nums1 {
 		interMap[v] += 1
 	}
-	k := 0
-	for _, v := range nums2{
+	for _, v := range nums2 {
 		if interMap[v] > 0 {
 			interMap[v] -= 1
 			res = append(res, v)
-			k ++
 		}
 	}
 	return res
 }
 
-
 /**
 排序解法
- */
+*/
 func intersect2(nums1 []int, nums2 []int) []int {
 	if len(nums1) == 0 || len(nums2) == 0 {
-		return []int {}
+		return []int{}
 	}
 	sort.Ints(nums1)
 	sort.Ints(nums2)
 	res := make([]int, 0)
-	idx1, idx2:= 0, 0
+	idx1, idx2 := 0, 0
 	for idx1 < len(nums1) && idx2 < len(nums2) {
-		if nums1[idx1] == nums2[idx2]{
+		if nums1[idx1] == nums2[idx2] {
 			res = append(res, nums1[idx1])
-			idx1 ++
-			idx2 ++
-		}else if nums1[idx1] < nums2[idx2] {
-				idx1 ++
-		}else{
-				idx2 ++
+			idx1++
+			idx2++
+		} else if nums1[idx1] < nums2[idx2] {
+			idx1++
+		} else {
+			idx2++
 		}
 	}
 	return res

@@ -29,24 +29,27 @@ import (
 // Related Topics 数组 双指针
 // 👍 638 👎 0
 
-
 //leetcode submit region begin(Prohibit modification and deletion)
 func threeSumClosest(nums []int, target int) int {
 	sort.Ints(nums)
 	ans := nums[0] + nums[1] + nums[2]
-	for i := 0; i < len(nums); i ++ {
-		left, right := i + 1, len(nums) - 1
+	for i := 0; i < len(nums); i++ {
+		if i != 0 && nums[i] == nums[i-1] {
+			continue
+		}
+		left, right := i+1, len(nums)-1
 		for left < right {
 			sum := nums[i] + nums[left] + nums[right]
-			if math.Abs(float64(sum - target)) < math.Abs(float64(ans - target)){
+			if math.Abs(float64(sum-target)) < math.Abs(float64(ans-target)) {
 				ans = sum
-			}else if sum < target{
-				left ++
-			}else {
-				right --
+			} else if sum < target {
+				left++
+			} else {
+				right--
 			}
 		}
 	}
 	return ans
 }
+
 //leetcode submit region end(Prohibit modification and deletion)

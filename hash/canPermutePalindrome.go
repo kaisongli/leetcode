@@ -18,27 +18,27 @@ package hash
 // Related Topics 哈希表 字符串
 // 👍 40 👎 0
 
-
 //leetcode submit region begin(Prohibit modification and deletion)
 func canPermutePalindrome(s string) bool {
-	if len(s) < 2 {
+	if len(s) <= 2 {
 		return true
 	}
 	m := map[byte]int{}
-	for i := 0; i < len(s); i ++ {
+	for i := 0; i < len(s); i++ {
 		if _, ok := m[s[i]]; ok {
 			m[s[i]] += 1
-		}else {
+		} else {
 			m[s[i]] = 1
 		}
 	}
 	ans := 0
 	for _, v := range m {
 		ans += v / 2 * 2
-		if v % 2 == 1 && ans % 2 == 0 {
-			ans ++
+		if v%2 == 1 && ans%2 == 0 {
+			ans++
 		}
 	}
 	return ans == len(s)
 }
+
 //leetcode submit region end(Prohibit modification and deletion)

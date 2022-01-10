@@ -39,24 +39,16 @@ dp[0] = nums[0]
 在很多题目中，因为 dp[i] 本身就定义成了题目中的问题，所以 dp[i] 最终就是要的答案。但是这里状态中的定义，并不是题目中要的问题，不能直接返回最后的一个状态 (这一步经常有初学者会摔跟头)。所以最终的答案，其实我们是寻找：
 
 max(dp[0], dp[1], ..., d[i-1], dp[i])
- */
+*/
 func maxSubArray(nums []int) int {
-	if len(nums) < 1 {
-		return 0
-	}
-	dp := make([]int, len(nums))
+	n, ans := len(nums), nums[0]
+	dp := make([]int, n)
 	dp[0] = nums[0]
-	res := nums[0]
-	for i := 1; i < len(nums); i ++ {
-		dp[i] = max(nums[i], dp[i - 1] + nums[i])
-		res = max(res, dp[i])
+	for i := 1; i < n; i++ {
+		dp[i] = max(dp[i-1]+nums[i], nums[i])
+		if ans < dp[i] {
+			ans = dp[i]
+		}
 	}
-	return res
-}
-
-func max(a int, b int) int{
-	if a > b{
-		return a
-	}
-	return b
+	return ans
 }

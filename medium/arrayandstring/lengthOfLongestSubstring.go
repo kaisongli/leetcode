@@ -1,4 +1,5 @@
 package arrayandstring
+
 //给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。
 //
 //示例 1:
@@ -32,20 +33,20 @@ package arrayandstring
 定义start和end双指针，start每次指向不重复字符的开始位置，start每次指向不重复字符的结束位置
 如果map中存在当前字符，更新start的位置
 此外，无论是否存在字符都需要更新res和end指针的值
- */
+*/
 func lengthOfLongestSubstring(s string) int {
 	if len(s) < 2 {
 		return len(s)
 	}
 	m := make(map[byte]int)
 	start, res := 0, 0
-	for end := 0; end < len(s); end ++ {
+	for end := 0; end < len(s); end++ {
 		ch := s[end]
 		if _, ok := m[ch]; ok {
-			start = max(m[ch], start)
+			start = max(m[ch]+1, start)
 		}
-		m[ch] = end + 1
-		res = max(res, end - start + 1 )
+		m[ch] = end
+		res = max(res, end-start+1)
 	}
 	return res
 }
@@ -56,4 +57,3 @@ func max(a int, b int) int {
 	}
 	return b
 }
-

@@ -1,5 +1,6 @@
 package array
-//给定一个整数数组和一个整数 k，判断数组中是否存在两个不同的索引 i 和 j，使得 nums [i] = nums [j]，并且 i 和 j 的差的 绝对值
+
+//219 给定一个整数数组和一个整数 k，判断数组中是否存在两个不同的索引 i 和 j，使得 nums [i] = nums [j]，并且 i 和 j 的差的 绝对值
 // 至多为 k。
 //
 //
@@ -21,9 +22,11 @@ package array
 // Related Topics 数组 哈希表
 // 👍 220 👎 0
 
-
 //leetcode submit region begin(Prohibit modification and deletion)
 func containsNearbyDuplicate(nums []int, k int) bool {
+	if len(nums) < 2 {
+		return false
+	}
 	m := map[int]int{}
 	for i, v := range nums {
 		if _, ok := m[v]; ok {
@@ -31,9 +34,10 @@ func containsNearbyDuplicate(nums []int, k int) bool {
 		}
 		m[v] = v
 		if len(m) > k {
-			delete(m, m[nums[i - k]])
+			delete(m, m[nums[i-k]])
 		}
 	}
 	return false
 }
+
 //leetcode submit region end(Prohibit modification and deletion)

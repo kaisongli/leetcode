@@ -13,7 +13,8 @@ import "sort"
   [-1, 0, 1],
   [-1, -1, 2]
 ]
- */
+*/
+//排序+双指针
 
 func threeSum(nums []int) [][]int {
 	var res [][]int
@@ -21,31 +22,32 @@ func threeSum(nums []int) [][]int {
 		return res
 	}
 	sort.Ints(nums)
-	for i := 0; i < len(nums); i ++ {
-		if nums[i] > 0{
+	for i := 0; i < len(nums); i++ {
+		if nums[i] > 0 {
 			return res
 		}
-		if i > 0 && nums[i] == nums[i - 1] {
+		if i > 0 && nums[i] == nums[i-1] {
 			continue
 		}
 		left := i + 1
 		right := len(nums) - 1
 		for left < right {
-			if nums[left] + nums[right] + nums[i] == 0 {
+			if nums[left]+nums[right]+nums[i] == 0 {
 				res = append(res, []int{nums[left], nums[right], nums[i]})
 				//去重
-				for left < right && nums[left] == nums[left + 1] {
-					left ++
+				for left < right && nums[left] == nums[left+1] {
+					left++
 				}
-				for left < right && nums[right] == nums[right - 1]{
-					right --
+				for left < right && nums[right] == nums[right-1] {
+					right--
 				}
-				left ++
-				right --
-			}else if nums[left] + nums[right] + nums[i] > 0 {
-				right --
-			}else {
-				left ++
+				//下一轮
+				left++
+				right--
+			} else if nums[left]+nums[right]+nums[i] > 0 {
+				right--
+			} else {
+				left++
 			}
 		}
 	}

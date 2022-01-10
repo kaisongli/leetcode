@@ -32,22 +32,22 @@ package arrayandstring
 3.判断方法：提前赋值判断。
 利用int32转换，判断tmp值，如果tmp是溢出的，那么(tmp*10)/10不会等于tmp，从而终止程序return 0;
 
- */
+*/
 //leetcode submit region begin(Prohibit modification and deletion)
 func reverse(x int) int {
-	if x == 0{
+	if x == 0 {
 		return x
 	}
 	rev := 0
-	for x != 0{
-		if tmp := int32(rev); (tmp * 10) / 10 != tmp{
+	for x != 0 {
+		if tmp := int32(rev); (tmp*10)/10 != tmp {
 			return 0
 		}
 		pop := x % 10
 		x /= 10
-		rev = rev * 10 + pop
+		rev = rev*10 + pop
 	}
 	return rev
 }
-//leetcode submit region end(Prohibit modification and deletion)
 
+//leetcode submit region end(Prohibit modification and deletion)

@@ -1,4 +1,5 @@
 package binarySearch
+
 //峰值元素是指其值大于左右相邻值的元素。
 //
 // 给定一个输入数组 nums，其中 nums[i] ≠ nums[i+1]，找到峰值元素并返回其索引。
@@ -27,22 +28,21 @@ package binarySearch
 // Related Topics 数组 二分查找
 // 👍 298 👎 0
 
-
 //leetcode submit region begin(Prohibit modification and deletion)
 func findPeakElement(nums []int) int {
 	if len(nums) == 1 {
-		return nums[0]
+		return 0
 	}
-	left, right := 0, len(nums) - 1
-	mid := left + (right - left) >> 1
+	left, right := 0, len(nums)-1
 	for left < right {
-		if nums[mid] < nums[mid + 1] {
+		mid := left + (right-left)>>1
+		if nums[mid] < nums[mid+1] {
 			left = mid + 1
-		}else {
+		} else {
 			right = mid
 		}
 	}
 	return left
 }
-//leetcode submit region end(Prohibit modification and deletion)
 
+//leetcode submit region end(Prohibit modification and deletion)

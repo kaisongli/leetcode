@@ -1,4 +1,7 @@
 package binarySearch
+
+import "time"
+
 //实现 int sqrt(int x) 函数。
 //
 // 计算并返回 x 的平方根，其中 x 是非负整数。
@@ -28,7 +31,7 @@ func mySqrt(x int) int {
 		return x
 	}
 	left, right := 1, x / 2
-	for left <= right{
+	for left <= right {
 		mid := left + (right - left) >> 1
 		if mid * mid == x {
 			return mid
@@ -40,5 +43,9 @@ func mySqrt(x int) int {
 	}
 	return right
 }
-
 //leetcode submit region end(Prohibit modification and deletion)
+
+
+
+
+2、select T1.name from T1 left join T2 on T1.id = T2.id where T2.score > 80 group by T1.name

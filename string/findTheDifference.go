@@ -1,4 +1,5 @@
 package string
+
 //给定两个字符串 s 和 t，它们只包含小写字母。
 //
 // 字符串 t 由字符串 s 随机重排，然后在随机位置添加一个字母。
@@ -44,30 +45,32 @@ package string
 // Related Topics 位运算 哈希表
 // 👍 169 👎 0
 
-
 //leetcode submit region begin(Prohibit modification and deletion)
 func findTheDifference(s string, t string) byte {
+	if len(s) == 0 && len(t) == 0 {
+		return ' '
+	}
 	m := map[byte]int{}
-	for i := 0; i < len(s); i ++ {
+	for i := 0; i < len(s); i++ {
 		if _, ok := m[s[i]]; ok {
-			m[s[i]] = m[s[i]] + 1
-		}else {
+			m[s[i]] += 1
+		} else {
 			m[s[i]] = 1
 		}
 	}
-	for i := 0; i < len(t); i ++ {
+	for i := 0; i < len(t); i++ {
 		if m[t[i]] == 0 {
 			return t[i]
-		}else {
-			m[t[i]] = m[t[i]] - 1
+		} else {
+			m[t[i]] -= 1
 		}
 	}
-	return t[len(t) - 1]
+	return t[len(t)-1]
 }
 
 func findTheDifference2(s string, t string) byte {
-	ans := t[len(t) - 1]
-	for i := 0; i < len(s); i ++ {
+	ans := t[len(t)-1]
+	for i := 0; i < len(s); i++ {
 		ans ^= s[i]
 		ans ^= t[i]
 	}
@@ -75,4 +78,3 @@ func findTheDifference2(s string, t string) byte {
 }
 
 //leetcode submit region end(Prohibit modification and deletion)
-

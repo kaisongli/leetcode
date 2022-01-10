@@ -71,7 +71,7 @@ import (
 2、判断第一个字符，确定数字字符串开始位置及符号位
 3、确定需要转换的数字字符串长度
 4、转换数字，根据符号位判断数字大小
- */
+*/
 
 //leetcode submit region begin(Prohibit modification and deletion)
 func myAtoi(str string) int {
@@ -85,7 +85,7 @@ func myAtoi(str string) int {
 	//判断第一个字符
 	switch str[0] {
 	case '0', '1', '2', '3', '4', '5', '6', '7', '8', '9':
-		sign, numStr = 1, str[1:]
+		sign, numStr = 1, str
 	case '+':
 		sign, numStr = 1, str[1:]
 	case '-':
@@ -96,17 +96,18 @@ func myAtoi(str string) int {
 	for i, ch := range numStr {
 		if ch < '0' || ch > '9' {
 			numStr = numStr[:i]
+			break
 		}
 	}
 	actualNum := 0
 	for _, ch := range numStr {
-		actualNum = actualNum* 10 + int(ch - '0')
+		actualNum = actualNum*10 + int(ch-'0')
 		if sign == 1 && actualNum > math.MaxInt32 {
 			return math.MaxInt32
 		}
-		if sign == -1 && actualNum * sign < math.MinInt32 {
+		if sign == -1 && actualNum*sign < math.MinInt32 {
 			return math.MinInt32
 		}
 	}
-	return  actualNum
+	return actualNum * sign
 }

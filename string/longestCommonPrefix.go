@@ -7,9 +7,9 @@ func longestCommonPrefix(strs []string) string {
 		return ""
 	}
 	prefix := strs[0]
-	for _, str := range strs{
+	for _, str := range strs {
 		if strings.Index(str, prefix) != 0 {
-			prefix = prefix[: len(prefix) - 1]
+			prefix = prefix[:len(prefix)-1]
 		}
 	}
 	return prefix

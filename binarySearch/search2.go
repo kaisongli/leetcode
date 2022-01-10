@@ -1,4 +1,5 @@
 package binarySearch
+
 //假设按照升序排序的数组在预先未知的某个点上进行了旋转。
 //
 // ( 例如，数组 [0,0,1,2,2,5,6] 可能变为 [2,5,6,0,0,1,2] )。
@@ -28,29 +29,28 @@ package binarySearch
 //分两段查找，重复元素跳过
 
 func search2(nums []int, target int) bool {
-	if len(nums) == 0{
+	if len(nums) == 0 {
 		return false
 	}
-	left, right := 0, len(nums) - 1
-	for left <= right{
-		mid := left + (right - left) >> 1
-		if nums[mid] == target{
+	left, right := 0, len(nums)-1
+	for left <= right {
+		mid := left + (right-left)>>1
+		if nums[mid] == target {
 			return true
 		}
-		if nums[left] == nums[mid]{
-			left ++
+		if nums[left] == nums[mid] {
+			left++
 			continue
-		}
-		if nums[left] < nums[mid]{
-			if nums[left] <= target && target <= nums[mid]{
+		} else if nums[left] < nums[mid] {
+			if nums[left] <= target && target <= nums[mid] {
 				right = mid - 1
-			}else{
+			} else {
 				left = mid + 1
 			}
-		}else{
-			if nums[mid] <= target && target <= nums[right]{
+		} else {
+			if nums[mid] <= target && target <= nums[right] {
 				left = mid + 1
-			}else{
+			} else {
 				right = mid - 1
 			}
 		}

@@ -23,26 +23,27 @@ import "strings"
 1、清除左右空格，全部切换为小写字母
 2、双指针跳过非字母和数字字符
 3、如果左指针和右指针的值不想等，直接返回false
- */
+*/
 
 func isPalindrome(s string) bool {
-	if len(s) == 0{
+	s = strings.TrimSpace(s)
+	if len(s) == 0 {
 		return true
 	}
 	s = strings.ToLower(s)
-	left, right := 0, len(s) - 1
+	left, right := 0, len(s)-1
 	for left < right {
 		for left < right && !isCharOrNum(s[left]) {
-			left ++
+			left++
 		}
 		for left < right && !isCharOrNum(s[right]) {
-			right --
+			right--
 		}
-		if left < right && s[left] != s[right]{
+		if left < right && s[left] != s[right] {
 			return false
 		}
-		left ++
-		right --
+		left++
+		right--
 	}
 	return true
 }
@@ -50,4 +51,3 @@ func isPalindrome(s string) bool {
 func isCharOrNum(ch byte) bool {
 	return (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z') || (ch >= '0' && ch <= '9')
 }
-

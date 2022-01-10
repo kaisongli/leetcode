@@ -1,4 +1,7 @@
-package array
+package dp
+
+import "math"
+
 /**
 第122题：买卖股票的最佳时机 II
 给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。
@@ -27,18 +30,14 @@ package array
 输入: [7,6,4,3,1]
 输出: 0
 解释: 在这种情况下, 没有交易完成, 所以最大利润为 0。
- */
+*/
 
 func maxProfit(prices []int) int {
-	if len(prices) < 2 {
-		return 0;
+	none, own := 0, math.MinInt32
+	for i := 0; i < len(prices); i++ {
+		tmp := none
+		none = max(none, own+prices[i])
+		own = max(own, tmp-prices[i])
 	}
-	profit, diff := 0, 0
-	for i := 1; i < len(prices); i ++ {
-		diff = prices[i] - prices[i - 1]
-		if diff > 0{
-			profit += diff
-		}
-	}
-	return profit
+	return none
 }

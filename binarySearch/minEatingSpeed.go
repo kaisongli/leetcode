@@ -42,43 +42,41 @@ package binarySearch
 // 1 <= piles[i] <= 10^9
 //
 // Related Topics 二分查找
-// 👍 98 👎 0
-
+// 👍 175 👎 0
 
 //leetcode submit region begin(Prohibit modification and deletion)
-func minEatingSpeed(piles []int, H int) int {
-	left := 1
-	var right = 1
-	for _, pile := range piles{
+func minEatingSpeed(piles []int, h int) int {
+	left, right := 1, 1
+	for _, pile := range piles {
 		right = max(right, pile)
 	}
-	for left <= right{
-		mid := left + (right - left) >> 1
-		if canEat(piles, mid, H) {
+	for left <= right {
+		mid := left + (right-left)>>1
+		if !canEat(piles, mid, h) {
 			left = mid + 1
-		}else {
+		} else {
 			right = mid - 1
 		}
 	}
 	return left
 }
 
-func canEat(piles []int, speed int, H int) bool{
+func canEat(piles []int, speed int, h int) bool {
 	time := 0
 	for _, pile := range piles {
 		time += pile / speed
-		if pile % speed > 0 {
-			time++
+		if pile%speed != 0 {
+			time += 1
 		}
 	}
-	return time > H
+	return time <= h
 }
 
-func max(a int, b int) int {
+func max(a, b int) int {
 	if a > b {
 		return a
 	}
 	return b
 }
-//leetcode submit region end(Prohibit modification and deletion)
 
+//leetcode submit region end(Prohibit modification and deletion)
